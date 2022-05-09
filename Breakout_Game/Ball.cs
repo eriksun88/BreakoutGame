@@ -14,7 +14,9 @@ namespace Breakout_Game
         int height = 10;
         int initX = 0;
         int initY = 300;
-
+        public int ballx = 5;
+        public int bally = 5;
+        
         public Ball()
         {
             Size = new Size(width, height);

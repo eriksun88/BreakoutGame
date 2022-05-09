@@ -70,6 +70,7 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 20;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FrmBreakoutgame
             // 
@@ -80,8 +81,11 @@
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.lblScore);
+            this.KeyPreview = true;
             this.Name = "FrmBreakoutgame";
             this.Text = "Break Out Game";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyisdown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyisup);
             this.ResumeLayout(false);
             this.PerformLayout();
 
