@@ -6,16 +6,24 @@ using System.Threading.Tasks;
 
 namespace Breakout_Game
 {
-    internal class Manager
+    public class Manager
     {
+        public Boolean IsPaused, Start;
+        public int Speed;
+        public int Score = 0;
+        FrmBreakoutgame Game;
 
-        Boolean IsPaused, Start;
-        int speed = 0;
-
-        public void Init()
+        public Manager()
         {
-            FrmBreakoutgame game = new FrmBreakoutgame();
-            game.Show();
+            Game = new FrmBreakoutgame(this);
+        }
+
+        public void Init(int speed)
+        {
+            Start = true;
+            Speed = speed;
+            Score = 0;
+            Game.Show();
         }
     }
 }

@@ -52,11 +52,11 @@
     <Compile Include="Brick.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Breakout.cs">
+    <Compile Include="BreakoutPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Breakout.Designer.cs">
-      <DependentUpon>Breakout.cs</DependentUpon>
+    <Compile Include="BreakoutPage.Designer.cs">
+      <DependentUpon>BreakoutPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Manager.cs" />
     <Compile Include="Paddle.cs">
@@ -70,8 +70,8 @@
     <Compile Include="WelcomePage.Designer.cs">
       <DependentUpon>WelcomePage.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Breakout.resx">
-      <DependentUpon>Breakout.cs</DependentUpon>
+    <EmbeddedResource Include="BreakoutPage.resx">
+      <DependentUpon>BreakoutPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

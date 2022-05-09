@@ -12,31 +12,25 @@ namespace Breakout_Game
 {
     public partial class FrmBreakoutgame : Form
     {
-        int height = 1000;
-        int width = 500;
-        bool goRight;
-        bool goLeft;
-        int speed = 10;
-
-        int ballx = 5;
-        int bally = 5;
-
-        int score = 0;
+        int width = 2000;
+        int height = 500;
+        Manager manager;
 
         private Random rnd = new Random();
-        public FrmBreakoutgame()
+        public FrmBreakoutgame(Manager manager)
         {
-            Size = new Size(height, width);
+            this.manager = manager;
             CreateBricks();
-            CreateBall();
+            CreateBall();           
             InitializeComponent();
+            lblScore.Text = "Score: " + this.manager.Score;
         }
 
         private void CreateBricks()
         {
             for (int y = 0; y < 5; y++)
             {
-                for (int x = 0; x < 10; x++)
+                for (int x = 0; x < 8; x++)
                 {
                     Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
                     Brick brick = new Brick(randomColor, x, y);
@@ -49,6 +43,21 @@ namespace Breakout_Game
         {
             Ball ball = new Ball();
             this.Controls.Add(ball);
+        }
+
+        private void CreatePaddle()
+        {
+
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            this.manager.IsPaused = true;
+        }
+
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            this.manager.IsPaused = false;
         }
     }
 }

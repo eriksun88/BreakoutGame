@@ -9,7 +9,6 @@ namespace Breakout_Game
 {
     internal class Paddle : Button
     {
-        int Right, Left, Width, Height;
-        string Colour;
+
     }
 }

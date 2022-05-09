@@ -10,14 +10,16 @@ namespace Breakout_Game
 {
     internal class Brick : PictureBox
     {
-        public int width = 100;
-        int height = 25;
+        int width = 90;
+        int height = 20;
+        int paddingX = 10;
+        int paddingY = 10;
 
         public Brick (Color color, int left, int right)
         {
             BackColor = color;
             Size = new Size(width, height);
-            Location = new Point(left * width, right * height);
+            Location = new Point(paddingX + left * (width + paddingX), paddingY + right * (height + paddingY));
         }
     }
 }
