@@ -19,7 +19,6 @@ namespace Breakout_Game
 
         public Manager()
         {
-
             SetUpSoundPlayer();
         }
 
@@ -61,6 +60,20 @@ namespace Breakout_Game
                 return true;                
             }
             return false;
+        }
+
+        public void ShowResult(string msg)
+        {
+            StopSound();
+            if (Game.ShowMessageBox(msg))
+            {
+                Game.Close();
+                Init(Speed);
+            }
+            else
+            {
+                Game.Close();
+            }
         }
     }
 }

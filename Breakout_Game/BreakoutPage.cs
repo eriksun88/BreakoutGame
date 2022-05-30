@@ -106,6 +106,7 @@ namespace Breakout_Game
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            lblScore.Text = "Score: " + manager.Score;
             if (manager.Start && !manager.IsPaused)
             {
                 paddle.Moving(manager.Speed, width);
@@ -124,7 +125,7 @@ namespace Breakout_Game
                 if (ball.Top + ball.Height > ClientSize.Height)
                 {
                     gameOver();
-                    MessageBox.Show("Oops! You Failed");
+                    manager.ShowResult("Oops! You Lose with Score: " + manager.Score + ".");
                 }
                 foreach (Control x in this.Controls)
                 {
@@ -135,16 +136,27 @@ namespace Breakout_Game
                             this.Controls.Remove(x);
                             ball.bally = -ball.bally;
                             manager.AddScore();
-                            lblScore.Text = "Score: " + manager.Score;
                         }
                     }
                 }
                 if (manager.CheckWin())
                 {
                     gameOver();
-                    MessageBox.Show("You Win");
+                    manager.ShowResult("Well Done, You Win with Score: " + manager.Score + "!");
                 }
             }            
+        }
+
+        public bool ShowMessageBox(string msg)
+        {
+            if (MessageBox.Show(msg + " Do you want to replay?", "Game Result", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public void gameOver()
         {
