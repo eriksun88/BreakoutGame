@@ -17,11 +17,13 @@ namespace Breakout_Game
         Ball ball;
         int height = 500;
         int width = 830;
+        private Point MouseDownLocation;
+
         private Random rnd = new Random();
-        public FrmBreakoutgame(Manager manager)
+        public FrmBreakoutgame(Manager manager, int bricksPerRow, int bricksPerCol)
         {
             this.manager = manager;
-            CreateBricks();
+            CreateBricks(bricksPerRow, bricksPerCol);
             CreateBall();
             CreatePaddle();
             InitializeComponent();
@@ -29,47 +31,63 @@ namespace Breakout_Game
             lblScore.Text = "Score: " + this.manager.Score;
         }
 
-        private void CreateBricks()
+        private void CreateBricks(int bricksPerRow, int bricksPerCol)
         {
-            for (int y = 0; y < 5; y++)
+            for (int y = 0; y < bricksPerCol; y++)
             {
                 Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
-                for (int x = 0; x < 8; x++)
+                for (int x = 0; x < bricksPerRow; x++)
                 {                    
                     Brick brick = new Brick(randomColor, x, y);
                     this.Controls.Add(brick);
                 }
             }
         }
-
         private void CreateBall()
         {
             ball = new Ball();
             this.Controls.Add(ball);
         }
-
         private void CreatePaddle()
         {
             paddle = new Paddle();
+            paddle.MouseDown += Paddle_MouseDown;
+            paddle.MouseMove += Paddle_MouseMove;
             this.Controls.Add(paddle);
         }
 
-        private void btnPause_Click(object sender, EventArgs e)
+        private void Paddle_MouseDown(object sender, MouseEventArgs e)
         {
-            this.manager.IsPaused = true;
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                MouseDownLocation = e.Location;
+            }
         }
 
-        private void btnRestart_Click(object sender, EventArgs e)
+        private void Paddle_MouseMove(object sender, MouseEventArgs e)
         {
-            this.manager.IsPaused = false;
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                int leftPos = e.X + paddle.Left - MouseDownLocation.X;
+                if (leftPos < 0)
+                {
+                    leftPos = 0;
+                }
+                if (leftPos + paddle.Width > width)
+                {
+                    leftPos = width - paddle.Width;
+                }                
+                paddle.Left = leftPos;
+            }
         }
+
         private void keyisdown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left && paddle.Left > 0)
             {
                 paddle.goLeft = true;
             }
-            if (e.KeyCode == Keys.Right && paddle.Left + paddle.Width < 826)
+            if (e.KeyCode == Keys.Right && paddle.Left + paddle.Width < width)
             {
                 paddle.goRight = true;
             }
@@ -88,58 +106,62 @@ namespace Breakout_Game
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            ball.Left += ball.ballx;
-            ball.Top += ball.bally;
+            if (manager.Start && !manager.IsPaused)
+            {
+                paddle.Moving(manager.Speed, width);
+                ball.Moving();
 
-            //label1.Text = "Score: " + score;
-
-            if (paddle.goLeft) { paddle.Left -= manager.Speed; } // move left
-            if (paddle.goRight) { paddle.Left += manager.Speed; } // move right
-
-            if (paddle.Left < 1)
-            {
-                paddle.goLeft = false; // stop the car from going off screen
-            }
-            else if (paddle.Left + paddle.Width > 920)
-            {
-                paddle.goRight = false;
-            }
-            if (ball.Left + ball.Width > ClientSize.Width || ball.Left < 0)
-            {
-                ball.ballx = -ball.ballx; // this will bounce the object from the left or right border
-            }
-
-            if (ball.Top < 0 || ball.Bounds.IntersectsWith(paddle.Bounds))
-            {
-                ball.bally = -ball.bally; // this will bounce the object from top and bottom border
-            }
-
-            if (ball.Top + ball.Height > ClientSize.Height)
-            {
-                gameOver();
-            }
-            foreach (Control x in this.Controls)
-            {
-                if (x is Brick)
+                if (ball.Left + ball.Width > ClientSize.Width || ball.Left < 0)
                 {
-                    if (ball.Bounds.IntersectsWith(x.Bounds))
+                    ball.ballx = -ball.ballx;
+                }
+
+                if (ball.Top < 0 || ball.Bounds.IntersectsWith(paddle.Bounds))
+                {
+                    ball.bally = -ball.bally;
+                }
+
+                if (ball.Top + ball.Height > ClientSize.Height)
+                {
+                    gameOver();
+                    MessageBox.Show("Oops! You Failed");
+                }
+                foreach (Control x in this.Controls)
+                {
+                    if (x is Brick)
                     {
-                        this.Controls.Remove(x);
-                        ball.bally = -ball.bally;
-                        manager.Score = manager.Score + 10;
+                        if (ball.Bounds.IntersectsWith(x.Bounds))
+                        {
+                            this.Controls.Remove(x);
+                            ball.bally = -ball.bally;
+                            manager.AddScore();
+                            lblScore.Text = "Score: " + manager.Score;
+                        }
                     }
                 }
-            }
-
-            if (manager.Score > 34)
-            {
-                gameOver();
-                MessageBox.Show("You Win");
-            }
+                if (manager.CheckWin())
+                {
+                    gameOver();
+                    MessageBox.Show("You Win");
+                }
+            }            
         }
-        private void gameOver()
+        public void gameOver()
         {
             timer1.Stop();
+            manager.Start = false;
+        }
+
+        private void lblPause_Click(object sender, EventArgs e)
+        {
+            manager.IsPaused = true;
+            timer1.Stop();
+        }
+
+        private void lblRestart_Click(object sender, EventArgs e)
+        {
+            manager.IsPaused = false;
+            timer1.Start();
         }
     }
 }

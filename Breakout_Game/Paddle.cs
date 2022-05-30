@@ -8,10 +8,10 @@ using System.Drawing;
 
 namespace Breakout_Game
 {
-    internal class Paddle : Button
+    internal class Paddle : PictureBox
     {
         int width = 175;
-        int height = 23;
+        int height = 15;
         int initX = 12;
         int initY = 381;
         public bool goRight = false;
@@ -21,8 +21,20 @@ namespace Breakout_Game
             Size = new Size(width, height);
             Location = new Point(initX, initY);
             BackColor = Color.White;
-            Left = 0;
         }
 
+        public void Moving(int speed, int maxWidth)
+        {
+            if (goLeft) { Left -= speed; }
+            if (goRight) { Left += speed; }
+            if (Left < 1)
+            {
+                goLeft = false;
+            }
+            else if (Left + Width > maxWidth)
+            {
+                goRight = false;
+            }
+        }
     }
 }

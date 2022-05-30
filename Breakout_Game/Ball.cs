@@ -24,5 +24,10 @@ namespace Breakout_Game
             Image = Image.FromFile(@"..\..\Pink.png");
             SizeMode = PictureBoxSizeMode.StretchImage;
         }
+        public void Moving()
+        {
+            Left += ballx;
+            Top += bally;
+        }
     }
 }

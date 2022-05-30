@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lblScore = new System.Windows.Forms.Label();
-            this.btnPause = new System.Windows.Forms.Button();
-            this.btnRestart = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblPause = new System.Windows.Forms.Label();
+            this.lblRestart = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblScore
@@ -46,31 +46,39 @@
             this.lblScore.TabIndex = 3;
             this.lblScore.Text = "Score:";
             // 
-            // btnPause
-            // 
-            this.btnPause.Location = new System.Drawing.Point(559, 417);
-            this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(88, 24);
-            this.btnPause.TabIndex = 4;
-            this.btnPause.Text = "Pause";
-            this.btnPause.UseVisualStyleBackColor = true;
-            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
-            // 
-            // btnRestart
-            // 
-            this.btnRestart.Location = new System.Drawing.Point(676, 417);
-            this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(88, 24);
-            this.btnRestart.TabIndex = 5;
-            this.btnRestart.Text = "Restart";
-            this.btnRestart.UseVisualStyleBackColor = true;
-            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lblPause
+            // 
+            this.lblPause.AutoSize = true;
+            this.lblPause.BackColor = System.Drawing.Color.Red;
+            this.lblPause.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPause.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblPause.Location = new System.Drawing.Point(597, 421);
+            this.lblPause.Name = "lblPause";
+            this.lblPause.Size = new System.Drawing.Size(59, 20);
+            this.lblPause.TabIndex = 4;
+            this.lblPause.Text = "Pause";
+            this.lblPause.Click += new System.EventHandler(this.lblPause_Click);
+            // 
+            // lblRestart
+            // 
+            this.lblRestart.AutoSize = true;
+            this.lblRestart.BackColor = System.Drawing.Color.Lime;
+            this.lblRestart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblRestart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRestart.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRestart.Location = new System.Drawing.Point(691, 421);
+            this.lblRestart.Name = "lblRestart";
+            this.lblRestart.Size = new System.Drawing.Size(69, 20);
+            this.lblRestart.TabIndex = 5;
+            this.lblRestart.Text = "Restart";
+            this.lblRestart.Click += new System.EventHandler(this.lblRestart_Click);
             // 
             // FrmBreakoutgame
             // 
@@ -78,8 +86,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(814, 461);
-            this.Controls.Add(this.btnRestart);
-            this.Controls.Add(this.btnPause);
+            this.Controls.Add(this.lblRestart);
+            this.Controls.Add(this.lblPause);
             this.Controls.Add(this.lblScore);
             this.KeyPreview = true;
             this.Name = "FrmBreakoutgame";
@@ -93,9 +101,9 @@
 
         #endregion
         private System.Windows.Forms.Label lblScore;
-        private System.Windows.Forms.Button btnPause;
-        private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblPause;
+        private System.Windows.Forms.Label lblRestart;
     }
 }
 
