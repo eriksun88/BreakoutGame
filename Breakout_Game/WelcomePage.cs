@@ -21,12 +21,12 @@ namespace Breakout_Game
 
         private void btnEasy_Click(object sender, EventArgs e)
         {
-            manager.Init(10);
+            manager.Init(1);
         }
 
         private void btnHard_Click(object sender, EventArgs e)
         {
-            manager.Init(20);
+            manager.Init(2);
         }
     }
 }

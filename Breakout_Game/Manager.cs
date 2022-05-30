@@ -29,7 +29,7 @@ namespace Breakout_Game
             Speed = speed;
             Score = 0;
             Game.Show();
-            PlaySound();
+            PlaySoundLoop();
         }
 
         private void SetUpSoundPlayer()
@@ -43,7 +43,7 @@ namespace Breakout_Game
             Score += ScorePerBrick;
         }
 
-        public void PlaySound()
+        public void PlaySoundLoop()
         {
             SoundPlayer.PlayLooping();
         }

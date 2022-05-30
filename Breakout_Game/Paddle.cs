@@ -25,8 +25,8 @@ namespace Breakout_Game
 
         public void Moving(int speed, int maxWidth)
         {
-            if (goLeft) { Left -= speed; }
-            if (goRight) { Left += speed; }
+            if (goLeft) { Left -= speed * 10; }
+            if (goRight) { Left += speed * 10; }
             if (Left < 1)
             {
                 goLeft = false;

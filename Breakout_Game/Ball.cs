@@ -24,10 +24,10 @@ namespace Breakout_Game
             Image = Image.FromFile(@"..\..\Pink.png");
             SizeMode = PictureBoxSizeMode.StretchImage;
         }
-        public void Moving()
+        public void Moving(int speed)
         {
-            Left += ballx;
-            Top += bally;
+            Left += ballx * speed;
+            Top += bally * speed;
         }
     }
 }

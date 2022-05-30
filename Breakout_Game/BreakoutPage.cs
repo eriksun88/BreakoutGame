@@ -110,7 +110,7 @@ namespace Breakout_Game
             if (manager.Start && !manager.IsPaused)
             {
                 paddle.Moving(manager.Speed, width);
-                ball.Moving();
+                ball.Moving(manager.Speed);
 
                 if (ball.Left + ball.Width > ClientSize.Width || ball.Left < 0)
                 {
@@ -125,7 +125,7 @@ namespace Breakout_Game
                 if (ball.Top + ball.Height > ClientSize.Height)
                 {
                     gameOver();
-                    manager.ShowResult("Oops! You Lose with Score: " + manager.Score + ".");
+                    manager.ShowResult("Oops! You Lose. Scored: " + manager.Score + ".");
                 }
                 foreach (Control x in this.Controls)
                 {
@@ -167,13 +167,22 @@ namespace Breakout_Game
         private void lblPause_Click(object sender, EventArgs e)
         {
             manager.IsPaused = true;
+            manager.StopSound();
             timer1.Stop();
         }
 
         private void lblRestart_Click(object sender, EventArgs e)
         {
             manager.IsPaused = false;
+            manager.PlaySoundLoop();
             timer1.Start();
+        }
+
+        private void FrmBreakoutgame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer1.Stop();
+            manager.StopSound();
+            manager.Start = false;
         }
     }
 }

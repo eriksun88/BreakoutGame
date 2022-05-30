@@ -92,6 +92,7 @@
             this.KeyPreview = true;
             this.Name = "FrmBreakoutgame";
             this.Text = "Break Out Game";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmBreakoutgame_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyisdown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyisup);
             this.ResumeLayout(false);
