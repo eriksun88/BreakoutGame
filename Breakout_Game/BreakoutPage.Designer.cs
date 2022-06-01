@@ -75,9 +75,9 @@
             this.lblRestart.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblRestart.Location = new System.Drawing.Point(691, 421);
             this.lblRestart.Name = "lblRestart";
-            this.lblRestart.Size = new System.Drawing.Size(69, 20);
+            this.lblRestart.Size = new System.Drawing.Size(81, 20);
             this.lblRestart.TabIndex = 5;
-            this.lblRestart.Text = "Restart";
+            this.lblRestart.Text = "Continue";
             this.lblRestart.Click += new System.EventHandler(this.lblRestart_Click);
             // 
             // FrmBreakoutgame

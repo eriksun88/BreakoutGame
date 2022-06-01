@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Breakout_Game
 {
-    internal class Paddle : PictureBox
+    public class Paddle : PictureBox
     {
         int width = 175;
         int height = 15;

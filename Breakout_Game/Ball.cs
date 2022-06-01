@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Breakout_Game
 {
-    internal class Ball : PictureBox
+    public class Ball : PictureBox
     {
         int width = 10;
         int height = 10;
@@ -21,7 +21,7 @@ namespace Breakout_Game
         {
             Size = new Size(width, height);
             Location = new Point(initX, initY);
-            Image = Image.FromFile(@"..\..\Pink.png");
+            Image = Properties.Resources.Pink;
             SizeMode = PictureBoxSizeMode.StretchImage;
         }
         public void Moving(int speed)
